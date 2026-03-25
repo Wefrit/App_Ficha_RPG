@@ -1,0 +1,23 @@
+# Buildozer
+.buildozer/
+bin/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ambiente virtual
+venv/
+venv2/
+
+# Saves do jogo (dados do usuário)
+*.json
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Buildozer spec backup
+buildozer.spec.save
