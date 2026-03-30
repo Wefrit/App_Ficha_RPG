@@ -50,15 +50,15 @@ class AttributesScreen(Screen):
                     # Caixa BoxLoop
         self.loop_ability_box = BoxLayout(
             orientation='vertical',
-            size_hint_y=1,
-            spacing=10
+            size_hint_y=1.2,
+            spacing=20
         )            
                     # Componentes do New_Ability_layout
                         # New_Ability_box   
         self.new_ability_input = TextInput(
             hint_text='Nova Habilidade',
             multiline=False,
-            size_hint_y=1,
+            size_hint_y=1.2,
         )    
                         # New_Ability_button
         new_ability_button = Button(
@@ -102,8 +102,8 @@ class AttributesScreen(Screen):
                     # Caixa BoxLoop
         self.loop_attribute_box = BoxLayout(
             orientation='vertical',
-            size_hint_y=1,
-            spacing=10
+            size_hint_y=1.2,
+            spacing=20
         )            
                     # Componentes do New_attribute_layout
                         # New_attribute_box   
@@ -132,23 +132,23 @@ class AttributesScreen(Screen):
 
         # Caixa de botão voltar
 
-        return_box_layout = BoxLayout(
-            orientation='vertical',
-            size_hint_x=1,
-        )
-            # Elementos da caixa de botão voltar
-        return_button = Button(text='Voltar')
-        return_button.bind(on_press=self.go_to_options)
+        # return_box_layout = BoxLayout(
+        #     orientation='vertical',
+        #     size_hint_x=1,
+        # )
+        #     # Elementos da caixa de botão voltar
+        # return_button = Button(text='Voltar')
+        # return_button.bind(on_press=self.go_to_options)
 
                 # Adicionando elemtnos ao return box layout
-        return_box_layout.add_widget(Widget(size_hint_y=8))
-        return_box_layout.add_widget(return_button)
+        # return_box_layout.add_widget(Widget(size_hint_y=8))
+        # return_box_layout.add_widget(return_button)
                
         # Screen Layout[Vertical]
-        screen_layout.add_widget(Widget(size_hint_x=1))
+        # screen_layout.add_widget(Widget(size_hint_x=1))
         screen_layout.add_widget(self.ability_layout)
         screen_layout.add_widget(self.attribute_layout)
-        screen_layout.add_widget(return_box_layout)
+        # screen_layout.add_widget(return_box_layout)
        
         # Main Screen
         self.add_widget(screen_layout)
@@ -221,7 +221,7 @@ class AttributesScreen(Screen):
         save_character(self.character)
         self.new_attribute_input.text = ""
 
-    def go_to_options(self,instace):
-        game_screen = self.manager.get_screen("game")
-        game_screen.update_ui()
-        self.manager.current='options'
+    # def go_to_options(self,instace):
+    #     game_screen = self.manager.get_screen("game")
+    #     game_screen.update_ui()
+    #     self.manager.current='options'

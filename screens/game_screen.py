@@ -8,6 +8,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.popup import Popup
 from kivy.app import App
 from characters.characters import *
+from screens.attributes_screen import AttributesScreen
 from save_manager import save_character
 
 class GameScreen(Screen):
@@ -64,10 +65,15 @@ class GameScreen(Screen):
         self.xp_label = Label(size_hint_y=1)
         self.hp_label = Label(size_hint_y=1)
         self.mana_label = Label(size_hint_y=1)
-        self.att_label = Label(size_hint_y=1)
-        self.magic_label = Label(size_hint_y=1)
-        self.ability_label = Label(size_hint_y=1)
-        self.quality_label = Label(size_hint_y=1)
+        self.attributes_abilities_button = Button(size_hint_y=1, text='Atributos/Habilidades')
+        self.attributes_abilities_button.bind(on_press=self.open_attributes_abilities)
+        self.powers_virtues_button = Button(size_hint_y=1, text='Poderes/Virtudes')
+        self.powers_virtues_button.bind(on_press=self.open_powers_virtues)
+
+        # self.att_label = Label(size_hint_y=1)
+        # self.magic_label = Label(size_hint_y=1)
+        # self.ability_label = Label(size_hint_y=1)
+        # self.quality_label = Label(size_hint_y=1)
         
 
             # Left Layout widgets
@@ -76,10 +82,12 @@ class GameScreen(Screen):
         left_layout.add_widget(self.xp_label)
         left_layout.add_widget(self.hp_label)
         left_layout.add_widget(self.mana_label)
-        left_layout.add_widget(self.att_label)
-        left_layout.add_widget(self.magic_label)
-        left_layout.add_widget(self.ability_label)
-        left_layout.add_widget(self.quality_label)
+        left_layout.add_widget(self.attributes_abilities_button)
+        left_layout.add_widget(self.powers_virtues_button)
+        # left_layout.add_widget(self.att_label)
+        # left_layout.add_widget(self.magic_label)
+        # left_layout.add_widget(self.ability_label)
+        # left_layout.add_widget(self.quality_label)
 
             # Left Layout (Bottom)
         self.note_box_button = Button(text='Criar Anotação')
@@ -252,10 +260,10 @@ class GameScreen(Screen):
         self.xp_label.text = f'XP: {self.character.xp}'
         self.hp_label.text = f'HP: {self.character.hp}/{self.character.base_hp}'
         self.mana_label.text = f'Mana: {self.character.mana}/{self.character.base_mana}'
-        self.ability_label.text = f'Pontos de Habilidade: {self.character.ability_points}'
-        self.att_label.text = f'Pontos de Atributo: {self.character.att_points}'
-        self.magic_label.text = f'Pontos de Poder: {self.character.magic_points}'
-        self.quality_label.text = f'Pontos de Qualidade {self.character.quality_points}'
+        # self.ability_label.text = f'Pontos de Habilidade: {self.character.ability_points}'
+        # self.att_label.text = f'Pontos de Atributo: {self.character.att_points}'
+        # self.magic_label.text = f'Pontos de Poder: {self.character.magic_points}'
+        # self.quality_label.text = f'Pontos de Qualidade {self.character.quality_points}'
         save_character(self.character)
 
         # Botões
@@ -298,7 +306,6 @@ class GameScreen(Screen):
         annotation_layout = BoxLayout(orientation='vertical', spacing=10, padding=20)
         annotation_input = TextInput(
             hint_text='Anotações',
-            size_hint_y=0.8,
             text=self.character.annotations  # Carrega as anotações salvas
         )
 
@@ -320,3 +327,34 @@ class GameScreen(Screen):
         self.character.annotations = annotation_input.text
         save_character(self.character)
         popup.dismiss()
+
+    def open_attributes_abilities(self, instance):
+        # layout principal do popup
+        root_layout = BoxLayout(orientation='vertical')
+
+        # conteúdo da tela
+        content = AttributesScreen()
+        content.character = App.get_running_app().character
+        content.on_pre_enter()
+
+        # botão fechar
+        close_button = Button(text='Fechar', size_hint_y=0.1)
+        
+        popup = Popup(
+            title='Atributos e Habilidades',
+            size_hint=(0.8, 0.8)
+        )
+
+        close_button.bind(on_press=popup.dismiss)
+
+        # adiciona tudo dentro de um único layout
+        root_layout.add_widget(content)
+        root_layout.add_widget(close_button)
+
+        # define esse layout como conteúdo do popup
+        popup.content = root_layout
+
+        popup.open()
+
+    def open_powers_virtues(self, instance):
+        pass
