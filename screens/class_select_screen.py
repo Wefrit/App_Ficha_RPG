@@ -5,6 +5,7 @@ from kivy.uix.textinput import TextInput
 from kivy.app import App
 from save_manager import save_character
 from characters.characters import *
+import os
 
 
 class ClassSelectScreen(Screen):
@@ -77,8 +78,28 @@ class ClassSelectScreen(Screen):
     def select_class(self, classe):
         nome = self.name_input.text.strip()
         if not nome:
-            nome = None
+            nome = classe.default_name
+
+        # Verifica se já existe um save com esse nome e classe
+        filename = f"{classe.__name__}_{nome}.json"
+        app = App.get_running_app()
+        path = os.path.join(app.user_data_dir, filename)
+
+        if os.path.exists(path):
+            self.show_error(f"Já existe um {classe.__name__} chamado {nome}!")
+            return
+
         personagem = classe(nome)
         App.get_running_app().character = personagem
-        save_character(personagem) 
+        save_character(personagem)
         self.manager.current = "game"
+
+    def show_error(self, message):
+        from kivy.uix.popup import Popup
+        from kivy.uix.label import Label
+        popup = Popup(
+            title='ERRO!',
+            content=Label(text=message),
+            size_hint=(0.6, 0.3)
+        )
+        popup.open()
