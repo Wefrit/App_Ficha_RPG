@@ -100,6 +100,9 @@ class GameScreen(Screen):
         self.note_box_button.bind(on_press=self.open_annotation)
         left_layout.add_widget(self.note_box_button)
 
+
+
+
             # Mid Layout
                 # Labels
                     # Label status
@@ -141,10 +144,13 @@ class GameScreen(Screen):
         mid_layout.add_widget(self.character_sprite)
         mid_layout.add_widget(self.gain_xp_layout)
         
+
+
+
         # Right Layout
             # Top
         top_right_box = BoxLayout(
-            size_hint_y=0.5,
+            size_hint_y=0.3,
             spacing=20,
             padding=50
         )
@@ -160,7 +166,7 @@ class GameScreen(Screen):
                 # Caixa de botões 
         self.button_box = BoxLayout(
             orientation='vertical',
-            padding=10,
+            padding=[5, 10, 10, 1],
             spacing=10,
             size_hint_x=1,
         )
@@ -170,13 +176,15 @@ class GameScreen(Screen):
             orientation='horizontal',
             size_hint_y=None,
             height=100,
+            spacing=10,
+            padding=10
         )
                     # Botões da caixa de botões de cima
                             # Botão de ganhar hp
         self.hp_up_button = Button(
             text='+ 1 hp',
             size_hint=(None, None),
-            size=(80,80)
+            size=(80,80),
         )
         self.hp_up_button.bind(on_press=self.hp_up)
 
@@ -206,7 +214,7 @@ class GameScreen(Screen):
         self.mana_down_button = Button(
             text='- 1 Mana',
             size_hint=(None,None),
-            size=(80,80)
+            size=(80,80),
         )
         self.mana_down_button.bind(on_press=self.mana_down)
              
@@ -222,6 +230,8 @@ class GameScreen(Screen):
             orientation='horizontal',
             size_hint_y=None,
             height=100,
+            padding=10,
+            spacing=10,
         )
                     # Botões da caixa de botões de baixo
                             # Botão de perder hp
@@ -248,7 +258,7 @@ class GameScreen(Screen):
             orientation='horizontal',
             size_hint_y=0.5,
             spacing=20,
-            padding=50
+            padding=10,
         )
                     # Voltar
         self.return_button = Button(
@@ -257,13 +267,22 @@ class GameScreen(Screen):
         )
         self.return_button.bind(on_press=self.go_to_menu)
 
-        bot_right_box.add_widget(Widget())
-        bot_right_box.add_widget(self.return_button)
+        return_container = BoxLayout(orientation='vertical')
+
+        return_container.add_widget(Widget())  # empurra pra baixo
+        return_container.add_widget(self.return_button)
+
+        bot_right_box.add_widget(Widget())  # empurra pra direita
+        bot_right_box.add_widget(return_container)
 
         # Right Layout Widgets
         right_layout.add_widget(top_right_box)
+        right_layout.add_widget(Widget(size_hint_y=0.3))
         right_layout.add_widget(self.button_box)
         right_layout.add_widget(bot_right_box)
+
+
+
 
             # Main Layout
         main_layout.add_widget(left_layout)
