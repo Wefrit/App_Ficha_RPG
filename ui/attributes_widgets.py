@@ -45,10 +45,12 @@ class AttributesWidget(BoxLayout):
 
     def lose_point(self, instance):
         self.value -= 1
-        if self.value <= 0:
+
+        if self.value <= 0 and self.attribute_name not in ('destreza', 'raciocinio'):
             del self.screen.character.attribute_dict[self.attribute_name]
             self.screen.loop_attribute_box.remove_widget(self)
         else:
             self.value_label.text = str(self.value)
             self.screen.character.attribute_dict[self.attribute_name] = self.value
-        save_character(self.screen.character)  
+
+        save_character(self.screen.character)

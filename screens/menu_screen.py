@@ -70,6 +70,7 @@ class  MenuScreen(Screen):
         character = load_character(filename)
 
         if character:
+            character.normalize()
             App.get_running_app().character = character
             self.manager.current = "game"
 
@@ -119,6 +120,7 @@ class  MenuScreen(Screen):
         character = load_character(filename)
 
         if character:
+            character.normalize()
             App.get_running_app().character = character
             popup.dismiss()
             self.manager.current = "game"

@@ -11,13 +11,14 @@ class Character:
         self.base_hp = 0
         self.xp = 0
         self.lvl = 1
-        self.attribute_dict = {}
+        self.attribute_dict = {'destreza':0,'raciocinio':0}
         self.magic_dict = {}
         self.ability_dict = {}
         self.ability_points = 0
         self.att_points = 0
         self.magic_points = 0
         self.quality_points = 0
+        self.defense = 10
         self.annotations = ""
 
 
@@ -65,6 +66,18 @@ class Character:
             "quality_points": self.quality_points,
             "annotations": self.annotations
         }
+
+    def normalize(self):
+        defaults = {
+            'destreza': 0,
+            'raciocinio': 0
+        }
+
+        for key, value in defaults.items():
+            self.attribute_dict.setdefault(key, value)
+
+        if not hasattr(self, 'defense'):
+            self.defense = 10
 
     @classmethod
     def from_dict(cls, data):

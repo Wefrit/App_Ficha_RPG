@@ -8,7 +8,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.popup import Popup
 from kivy.app import App
 from characters.characters import *
-from screens.attributes_screen import AttributesScreen
+from ui.attributes_screen import AttributesScreen
 from save_manager import save_character
 
 class GameScreen(Screen):
@@ -65,6 +65,9 @@ class GameScreen(Screen):
         self.xp_label = Label(size_hint_y=1)
         self.hp_label = Label(size_hint_y=1)
         self.mana_label = Label(size_hint_y=1)
+        self.defense_label = Label(size_hint_y=1)
+        self.initiative_label = Label(size_hint_y=1)
+        
         self.attributes_abilities_button = Button(size_hint_y=1, text='Atributos/Habilidades')
         self.attributes_abilities_button.bind(on_press=self.open_attributes_abilities)
         self.powers_virtues_button = Button(size_hint_y=1, text='Poderes/Virtudes')
@@ -82,8 +85,11 @@ class GameScreen(Screen):
         left_layout.add_widget(self.xp_label)
         left_layout.add_widget(self.hp_label)
         left_layout.add_widget(self.mana_label)
+        left_layout.add_widget(self.defense_label)
+        left_layout.add_widget(self.initiative_label)
         left_layout.add_widget(self.attributes_abilities_button)
         left_layout.add_widget(self.powers_virtues_button)
+        
         # left_layout.add_widget(self.att_label)
         # left_layout.add_widget(self.magic_label)
         # left_layout.add_widget(self.ability_label)
@@ -260,6 +266,8 @@ class GameScreen(Screen):
         self.xp_label.text = f'XP: {self.character.xp}'
         self.hp_label.text = f'HP: {self.character.hp}/{self.character.base_hp}'
         self.mana_label.text = f'Mana: {self.character.mana}/{self.character.base_mana}'
+        self.defense_label.text = f'Defesa: {self.character.defense}'
+        self.initiative_label.text = f"Iniciativa: {self.character.attribute_dict['destreza'] + self.character.attribute_dict['raciocinio']}"
         # self.ability_label.text = f'Pontos de Habilidade: {self.character.ability_points}'
         # self.att_label.text = f'Pontos de Atributo: {self.character.att_points}'
         # self.magic_label.text = f'Pontos de Poder: {self.character.magic_points}'
@@ -355,6 +363,7 @@ class GameScreen(Screen):
         popup.content = root_layout
 
         popup.open()
+        self.update_ui()
 
     def open_powers_virtues(self, instance):
         pass

@@ -3,7 +3,7 @@ from kivy.uix.screenmanager import ScreenManager
 from screens.game_screen import GameScreen
 from screens.menu_screen import MenuScreen
 from screens.class_select_screen import ClassSelectScreen
-from screens.attributes_screen import AttributesScreen
+# from ui.attributes_screen import AttributesScreen
 from screens.options_screen import Options
 from screens.stats_screen import Stats
 
