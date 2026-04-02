@@ -148,23 +148,15 @@ class GameScreen(Screen):
             spacing=20,
             padding=50
         )
-                # Botões de cima
-                    # Voltar
-        self.return_button = Button(
-            text='Voltar',
-            size_hint_x=0.5,
+                # Status
+        self.stats_button = Button(
+            text='Status',
+            size_hint_x=1
         )
-        self.return_button.bind(on_press=self.go_to_menu)
-
-                    # Opções
-        self.options_button = Button(
-            text='Opções',
-            size_hint_x=0.5
-        )
-        self.options_button.bind(on_press=self.go_to_options)
-        top_right_box.add_widget(self.options_button)
-        top_right_box.add_widget(self.return_button)
-
+        self.stats_button.bind(on_press=self.go_to_stats)
+        top_right_box.add_widget(self.stats_button)
+            
+            # Mid
                 # Caixa de botões 
         self.button_box = BoxLayout(
             orientation='vertical',
@@ -176,14 +168,15 @@ class GameScreen(Screen):
                     # Caixa de botões de cima
         self.upper_button_box = BoxLayout(
             orientation='horizontal',
-            size_hint_y=1,
+            size_hint_y=None,
+            height=100,
         )
                     # Botões da caixa de botões de cima
                             # Botão de ganhar hp
         self.hp_up_button = Button(
-            text='+ 1 HP',
-            size_hint_y=1,
-            size_hint_x=1,
+            text='+ 1 hp',
+            size_hint=(None, None),
+            size=(80,80)
         )
         self.hp_up_button.bind(on_press=self.hp_up)
 
@@ -197,40 +190,45 @@ class GameScreen(Screen):
             orientation='horizontal',
             padding=10,
             spacing=10,
-            size_hint_y=1,
+            size_hint_y=None,
+            height=100,
         )
                     # Botões da caixa de botões do meio
                              # Botão de ganhar mana
         self.mana_up_button = Button(
             text='+ 1 Mana',
-            size_hint_y=1,
-            size_hint_x=1,
+            size_hint=(None,None),
+            size=(80,80),
         )
         self.mana_up_button.bind(on_press=self.mana_up)
 
                             # Botão de perder mana
         self.mana_down_button = Button(
             text='- 1 Mana',
-            size_hint_y=1,
-            size_hint_x=1,
+            size_hint=(None,None),
+            size=(80,80)
         )
         self.mana_down_button.bind(on_press=self.mana_down)
              
                 # Widgets da Caixa de botões de baixo
+        self.mid_button_box.add_widget(Widget(size_hint_x=1))
         self.mid_button_box.add_widget(self.mana_down_button)
+        self.mid_button_box.add_widget(Widget(size_hint_x=0.2))
         self.mid_button_box.add_widget(self.mana_up_button)
+        self.mid_button_box.add_widget(Widget(size_hint_x=1))
 
             # Caixa de botões de baixo
         self.bottom_button_box = BoxLayout(
             orientation='horizontal',
-            size_hint_y=1,
+            size_hint_y=None,
+            height=100,
         )
                     # Botões da caixa de botões de baixo
                             # Botão de perder hp
         self.hp_down_button = Button(
             text='- 1 HP',
-            size_hint_y=1,
-            size_hint_x=1,
+            size_hint=(None,None),
+            size=(80,80)
         )
         self.hp_down_button.bind(on_press=self.hp_down)
 
@@ -244,9 +242,28 @@ class GameScreen(Screen):
         self.button_box.add_widget(self.mid_button_box)
         self.button_box.add_widget(self.bottom_button_box)
 
+            # Bot Right
+                # Return Box
+        bot_right_box = BoxLayout(
+            orientation='horizontal',
+            size_hint_y=0.5,
+            spacing=20,
+            padding=50
+        )
+                    # Voltar
+        self.return_button = Button(
+            text='Sair',
+            size_hint_x=1,
+        )
+        self.return_button.bind(on_press=self.go_to_menu)
+
+        bot_right_box.add_widget(Widget())
+        bot_right_box.add_widget(self.return_button)
+
         # Right Layout Widgets
         right_layout.add_widget(top_right_box)
         right_layout.add_widget(self.button_box)
+        right_layout.add_widget(bot_right_box)
 
             # Main Layout
         main_layout.add_widget(left_layout)
@@ -307,8 +324,8 @@ class GameScreen(Screen):
         self.manager.current = "menu"
         save_character(self.character)
     
-    def go_to_options(self, instance):
-        self.manager.current = "options"
+    def go_to_stats(self, instance):
+        self.manager.current = "stats"
 
     def open_annotation(self, instance):
         annotation_layout = BoxLayout(orientation='vertical', spacing=10, padding=20)
@@ -353,7 +370,7 @@ class GameScreen(Screen):
             size_hint=(0.8, 0.8)
         )
 
-        close_button.bind(on_press=popup.dismiss)
+        close_button.bind(on_press=lambda instance: self.close_popup(popup))
 
         # adiciona tudo dentro de um único layout
         root_layout.add_widget(content)
@@ -363,6 +380,10 @@ class GameScreen(Screen):
         popup.content = root_layout
 
         popup.open()
+        self.update_ui()
+    
+    def close_popup(self, popup):
+        popup.dismiss()
         self.update_ui()
 
     def open_powers_virtues(self, instance):

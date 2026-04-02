@@ -60,10 +60,29 @@ class Stats(Screen):
         mana_box_layout.add_widget(self.mana_label) # Alterar para receber o valor do mana total
         mana_box_layout.add_widget(plus_mana_button)
 
+                        # Box da Deesa
+        defense_box_layout = BoxLayout(
+            orientation='horizontal',
+            size_hint_y=1,
+        )
+                            # Elementos da Box de Mana
+        self.defense_label = Label(text='defense', size_hint_x=3)
+        minus_defense_button = Button(text='-', size_hint_x=1)
+        minus_defense_button.bind(on_press=self.minus_defense)
+
+        plus_defense_button = Button(text='+', size_hint_x=1)
+        plus_defense_button.bind(on_press=self.plus_defense)
+
+                                # Adicionando os elementos À Caixa de defense
+        defense_box_layout.add_widget(minus_defense_button)
+        defense_box_layout.add_widget(self.defense_label) # Alterar para receber o valor do defense total
+        defense_box_layout.add_widget(plus_defense_button)
+
                             # Adicionando os elementos à caixa de alterar stats
         change_stats_layout.add_widget(Label(text='Stats',size_hint_y=3))
         change_stats_layout.add_widget(hp_box_layout)
         change_stats_layout.add_widget(mana_box_layout)
+        change_stats_layout.add_widget(defense_box_layout)
         change_stats_layout.add_widget(Widget(size_hint_y=2))
 
                 # Box lado direito para botão voltar
@@ -78,7 +97,7 @@ class Stats(Screen):
         )
                         # Elementos da caixa do botão retornar
         return_button = Button(text='Voltar')
-        return_button.bind(on_press=self.go_to_options)
+        return_button.bind(on_press=self.go_to_game)
 
                             # Adicionando os elementos da return button box layout
         return_button_box_layout.add_widget(Widget(size_hint_x=1))
@@ -102,10 +121,10 @@ class Stats(Screen):
             return
         self.update_ui()
         
-    def go_to_options(self,instance):
+    def go_to_game(self,instance):
         game_screen = self.manager.get_screen("game")
         game_screen.update_ui()
-        self.manager.current = 'options'
+        self.manager.current = 'game'
         save_character(self.character)
 
     def plus_hp(self, instance):
@@ -137,9 +156,25 @@ class Stats(Screen):
             if self.character.mana > self.character.base_mana:
                 self.character.mana = self.character.base_mana
             self.update_ui()
+
+    def plus_defense(self, instance):
+        if not self.character:
+            return
+        self.character.defense += 1
+        self.update_ui()
+
+    def minus_defense(self, instance):
+        if not self.character:
+            return
+        if self.character.defense > 10:
+            self.character.defense -= 1
+            if self.character.defense > self.character.defense:
+                self.character.defense = self.character.defense
+            self.update_ui()
     
     def update_ui(self):
         if not self.character:
             return
         self.hp_label.text = f'HP {self.character.hp}/{self.character.base_hp}'
         self.mana_label.text = f'Mana {self.character.mana}/{self.character.base_mana}'
+        self.defense_label.text = f'Defesa {self.character.defense}'
