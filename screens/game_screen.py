@@ -9,6 +9,7 @@ from kivy.uix.popup import Popup
 from kivy.app import App
 from characters.characters import *
 from ui.attributes_screen import AttributesScreen
+from ui.magic_virtue_screen import MagicVirtuesScreen
 from save_manager import save_character
 
 class GameScreen(Screen):
@@ -406,4 +407,30 @@ class GameScreen(Screen):
         self.update_ui()
 
     def open_powers_virtues(self, instance):
-        pass
+        # layout principal do popup
+        root_layout = BoxLayout(orientation='vertical')
+
+        # conteúdo da tela
+        content = MagicVirtuesScreen()
+        content.character = App.get_running_app().character
+        content.on_pre_enter()
+
+        # botão fechar
+        close_button = Button(text='Fechar', size_hint_y=0.1)
+        
+        popup = Popup(
+            title='Poderes e Virtudes',
+            size_hint=(0.8, 0.8)
+        )
+
+        close_button.bind(on_press=lambda instance: self.close_popup(popup))
+
+        # adiciona tudo dentro de um único layout
+        root_layout.add_widget(content)
+        root_layout.add_widget(close_button)
+
+        # define esse layout como conteúdo do popup
+        popup.content = root_layout
+
+        popup.open()
+        self.update_ui()

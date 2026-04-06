@@ -14,6 +14,14 @@ class Character:
         self.attribute_dict = {'destreza':0,'raciocinio':0}
         self.magic_dict = {}
         self.ability_dict = {}
+        self.virtues_dict = {'Aparência': 0,
+                             'Carisma': 0,
+                             'Força': 0,
+                             'Inteligência': 0,
+                             'Manipulação': 0,
+                             'Percepção': 0,
+                             'Raciocínio': 0,
+                             'Vigor': 0}
         self.ability_points = 0
         self.att_points = 0
         self.magic_points = 0
