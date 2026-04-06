@@ -144,8 +144,8 @@ class Bardo(Character):
             self.base_hp += 1
         self.ability_points += 1
 
-    # Gorgona
-class Gorgona(Character):
+    # Ladina
+class Ladino(Character):
     sprite = "characters/gorgona/gorgona_base_1.png"
     default_name = 'Quezia'
     def __init__(self, name):
@@ -173,7 +173,7 @@ class Gorgona(Character):
             self.quality_points += 2
         self.ability_points += 2
 
-class Fada(Character):
+class Clérigo(Character):
     default_name = 'Freya'
     sprite = "characters/fada/fada_base_1.png"
     def __init__(self, name):
@@ -201,7 +201,7 @@ class Fada(Character):
             self.quality_points += 1
         self.base_hp += 1
 
-class Golen(Character):
+class Bárbaro(Character):
     sprite = "characters/golen/golen_base_1.png"
     default_name = 'Felipe'
     def __init__(self, name):
@@ -229,7 +229,7 @@ class Golen(Character):
             self.ability_points += 2
         self.base_hp += 1
 
-class Elfo(Character):
+class Mago(Character):
     sprite = "characters/elfo/elfo_base_1.png"
     default_name = 'Carol'
 
@@ -258,7 +258,7 @@ class Elfo(Character):
             self.base_hp += 1
         self.ability_points += 1
 
-class Vampiro(Character):
+class Caçador(Character):
     sprite = "characters/vampiro/vampiro_base_1.png"
     default_name = 'Julie'
 
@@ -287,36 +287,7 @@ class Vampiro(Character):
             self.quality_points += 2
         self.ability_points += 1
 
-class Panda(Character):
-    sprite = "characters/panda/panda_base_1.png"
-    default_name = 'Luna'
-
-    def __init__(self, name):
-        super().__init__(name)
-        self.base_hp = 60
-        self.base_mana = 10
-        self.hp = 60
-        self.mana = 10
-        self.ability_points = 0
-        self.quality_points = 0
-        self.magic_points = 0
-        self.att_points = 0
-
-    def _level_up(self):
-        # Bárbaro
-        if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
-            self.magic_points += 1
-        if (self.lvl - 1) % 4 == 0:
-            self.att_points += 2
-        if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 1
-        if self.lvl % 3 == 0:
-            self.ability_points += 1
-        self.base_hp += 2
-
-class Dríade(Character):
+class Druida(Character):
     sprite = "characters/driade/driade_base_1.png"
     default_name = 'Jessica'
     
@@ -345,7 +316,7 @@ class Dríade(Character):
             self.ability_points += 1
         self.base_hp += 2
 
-class Draconiano(Character):
+class Pladino(Character):
     sprite = "characters/draconiano/draconiano_base_1.png"
     default_name = 'Paloma'
 
@@ -374,7 +345,7 @@ class Draconiano(Character):
             self.base_hp += 2
         self.ability_points += 1
 
-class Who(Character):
+class Cavaleiro(Character):
     sprite = "characters/who/who_base_1.png"
     default_name = 'Catarina/Luke'
 
@@ -402,3 +373,206 @@ class Who(Character):
         if self.lvl % 3 == 0:
             self.base_hp += 2
         self.ability_points += 2
+
+class Artífice(Character):
+    sprite = "characters/who/who_base_1.png"
+    default_name = 'Catarina/Luke'
+
+    def __init__(self, name):
+        super().__init__(name)
+        self.base_hp = 10
+        self.base_mana = 10
+        self.hp = 10
+        self.mana = 10
+        self.ability_points = 0
+        self.quality_points = 0
+        self.magic_points = 0
+        self.att_points = 0
+
+    def _level_up(self):
+        # Cavaleiro
+        if (self.lvl - 1) % 6 == 0:
+            self.base_mana += 2
+        if (self.lvl - 1) % 5 == 0:
+            self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.magic_points += 2
+        if (self.lvl - 1) % 3 == 0:
+            self.quality_points += 1
+        if self.lvl % 3 == 0:
+            self.base_hp += 1
+        self.ability_points += 1
+
+class Artista_Marcial(Character):
+    sprite = "characters/who/who_base_1.png"
+    default_name = 'Catarina/Luke'
+
+    def __init__(self, name):
+        super().__init__(name)
+        self.base_hp = 10
+        self.base_mana = 10
+        self.hp = 10
+        self.mana = 10
+        self.ability_points = 0
+        self.quality_points = 0
+        self.magic_points = 0
+        self.att_points = 0
+
+    def _level_up(self):
+        # Cavaleiro
+        if (self.lvl - 1) % 6 == 0:
+            self.base_mana += 1
+        if (self.lvl - 1) % 5 == 0:
+            self.magic_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.att_points += 1
+        if (self.lvl - 1) % 3 == 0:
+            self.quality_points += 2
+        if self.lvl % 3 == 0:
+            self.base_hp += 1
+        self.ability_points += 2
+
+class Bruxo(Character):
+    sprite = "characters/who/who_base_1.png"
+    default_name = 'Catarina/Luke'
+
+    def __init__(self, name):
+        super().__init__(name)
+        self.base_hp = 10
+        self.base_mana = 10
+        self.hp = 10
+        self.mana = 10
+        self.ability_points = 0
+        self.quality_points = 0
+        self.magic_points = 0
+        self.att_points = 0
+
+    def _level_up(self):
+        # Cavaleiro
+        if (self.lvl - 1) % 6 == 0:
+            self.base_mana += 2
+        if (self.lvl - 1) % 5 == 0:
+            self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.magic_points += 2
+        if (self.lvl - 1) % 3 == 0:
+            self.quality_points += 1
+        if self.lvl % 3 == 0:
+            self.base_hp += 1
+        self.ability_points += 1
+
+class Bucaneiro(Character):
+    sprite = "characters/who/who_base_1.png"
+    default_name = 'Catarina/Luke'
+
+    def __init__(self, name):
+        super().__init__(name)
+        self.base_hp = 10
+        self.base_mana = 10
+        self.hp = 10
+        self.mana = 10
+        self.ability_points = 0
+        self.quality_points = 0
+        self.magic_points = 0
+        self.att_points = 0
+
+    def _level_up(self):
+        # Cavaleiro
+        if (self.lvl - 1) % 6 == 0:
+            self.base_mana += 1
+        if (self.lvl - 1) % 5 == 0:
+            self.magic_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.att_points += 1
+        if (self.lvl - 1) % 3 == 0:
+            self.quality_points += 2
+        if self.lvl % 3 == 0:
+            self.base_hp += 1
+        self.ability_points += 2
+
+class Curandeiro(Character):
+    sprite = "characters/who/who_base_1.png"
+    default_name = 'Catarina/Luke'
+
+    def __init__(self, name):
+        super().__init__(name)
+        self.base_hp = 10
+        self.base_mana = 10
+        self.hp = 10
+        self.mana = 10
+        self.ability_points = 0
+        self.quality_points = 0
+        self.magic_points = 0
+        self.att_points = 0
+
+    def _level_up(self):
+        # Cavaleiro
+        if (self.lvl - 1) % 6 == 0:
+            self.base_mana += 2
+        if (self.lvl - 1) % 5 == 0:
+            self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.magic_points += 1
+        if (self.lvl - 1) % 3 == 0:
+            self.quality_points += 1
+        if self.lvl % 3 == 0:
+            self.base_hp += 1
+        self.ability_points += 2
+
+class Engenheiro(Character):
+    sprite = "characters/who/who_base_1.png"
+    default_name = 'Catarina/Luke'
+
+    def __init__(self, name):
+        super().__init__(name)
+        self.base_hp = 10
+        self.base_mana = 10
+        self.hp = 10
+        self.mana = 10
+        self.ability_points = 0
+        self.quality_points = 0
+        self.magic_points = 0
+        self.att_points = 0
+
+    def _level_up(self):
+        # Cavaleiro
+        if (self.lvl - 1) % 6 == 0:
+            self.base_mana += 1
+        if (self.lvl - 1) % 5 == 0:
+            self.magic_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.att_points += 1
+        if (self.lvl - 1) % 3 == 0:
+            self.quality_points += 2
+        if self.lvl % 3 == 0:
+            self.base_hp += 1
+        self.ability_points += 2
+
+class Guerreiro(Character):
+    sprite = "characters/who/who_base_1.png"
+    default_name = 'Catarina/Luke'
+
+    def __init__(self, name):
+        super().__init__(name)
+        self.base_hp = 10
+        self.base_mana = 10
+        self.hp = 10
+        self.mana = 10
+        self.ability_points = 0
+        self.quality_points = 0
+        self.magic_points = 0
+        self.att_points = 0
+
+    def _level_up(self):
+        # Cavaleiro
+        if (self.lvl - 1) % 6 == 0:
+            self.base_mana += 1
+        if (self.lvl - 1) % 5 == 0:
+            self.magic_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.att_points += 1
+        if (self.lvl - 1) % 3 == 0:
+            self.quality_points += 2
+        if self.lvl % 3 == 0:
+            self.base_hp += 2
+        self.ability_points += 1
