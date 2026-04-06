@@ -24,6 +24,9 @@ def save_character(character):
     character.save_filename = filename
 
 def load_character(filename):
+    import inspect
+    import characters.characters as chars
+
     app = App.get_running_app()
     path = os.path.join(app.user_data_dir, filename)
 
@@ -33,7 +36,25 @@ def load_character(filename):
     with open(path, "r") as file:
         data = json.load(file)
 
-    character = Character.from_dict(data)
+    class_name = data.get("class_name")
+
+    if not class_name:
+        class_name = filename.split("_")[0]
+
+    # encontrar classe
+    classe = None
+    for name, obj in inspect.getmembers(chars):
+        if inspect.isclass(obj) and name == class_name:
+            classe = obj
+            break
+
+    if classe is None:
+        print(f"Classe {class_name} não encontrada")
+        return None
+
+    character = classe(data.get("name", "SemNome"))
+
+    character.__dict__.update(data)
 
     character.save_filename = filename
 

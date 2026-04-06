@@ -41,7 +41,7 @@ class  MenuScreen(Screen):
             text='Novo Personagem',
             size_hint_y=1,
         )
-        new_character_button.bind(on_press=self.go_to_class_selection)
+        new_character_button.bind(on_press=self.open_class_popup)
 
                             # Botão para voltar para Fechar o jogo
         close_button = Button(
@@ -134,3 +134,154 @@ class  MenuScreen(Screen):
 
         popup.dismiss()
         self.go_to_load(None)
+
+
+    def get_all_classes(self):
+        import inspect
+        import characters.characters as chars
+
+        classes = []
+
+        for name, obj in inspect.getmembers(chars):
+            if inspect.isclass(obj):
+                if issubclass(obj, chars.Character) and obj is not chars.Character:
+                    
+                    # 🔥 GARANTE que só entra classe jogável
+                    if hasattr(obj, "sprite"):
+                        classes.append(obj)
+
+        return classes
+
+    def open_class_popup(self, instance):
+        from kivy.uix.popup import Popup
+        from kivy.uix.boxlayout import BoxLayout
+        from kivy.uix.button import Button
+        from kivy.uix.scrollview import ScrollView
+        from kivy.uix.gridlayout import GridLayout
+
+        # layout principal
+        layout = BoxLayout(orientation='vertical', spacing=10, padding=10)
+
+        # scroll (caso tenha muitas classes)
+        scroll = ScrollView()
+
+        # grid com 2 colunas
+        grid = GridLayout(
+            cols=2,
+            spacing=10,
+            size_hint_y=None
+        )
+        grid.bind(minimum_height=grid.setter('height'))
+
+        # pegar classes automaticamente
+        classes = self.get_all_classes()
+
+        # criar botão pra cada classe
+        for classe in classes:
+            btn = Button(
+                text=classe.__name__,
+                size_hint_y=None,
+                height=80
+            )
+
+            btn.bind(on_press=lambda inst, c=classe: self.open_name_popup(c, popup))
+
+            grid.add_widget(btn)
+
+        scroll.add_widget(grid)
+        layout.add_widget(scroll)
+
+        # botão cancelar
+        cancel_btn = Button(text="Cancelar", size_hint_y=0.2)
+        layout.add_widget(cancel_btn)
+
+        popup = Popup(
+            title="Selecionar Classe",
+            content=layout,
+            size_hint=(0.8, 0.8)
+        )
+
+        cancel_btn.bind(on_press=popup.dismiss)
+
+        popup.open()
+
+    def open_name_popup(self, classe, previous_popup):
+        from kivy.uix.popup import Popup
+        from kivy.uix.boxlayout import BoxLayout
+        from kivy.uix.button import Button
+        from kivy.uix.textinput import TextInput
+
+        previous_popup.dismiss()
+
+        layout = BoxLayout(orientation='vertical', spacing=10, padding=20)
+
+        name_input = TextInput(
+            hint_text="Nome do personagem",
+            multiline=False,
+            size_hint_y=0.4
+        )
+
+        buttons = BoxLayout(size_hint_y=0.3, spacing=10)
+
+        back_btn = Button(text="Voltar")
+        create_btn = Button(text="Criar")
+
+        buttons.add_widget(back_btn)
+        buttons.add_widget(create_btn)
+
+        layout.add_widget(name_input)
+        layout.add_widget(buttons)
+
+        popup = Popup(
+            title=f"Criar {classe.__name__}",
+            content=layout,
+            size_hint=(0.7, 0.5)
+        )
+
+        # botão voltar
+        back_btn.bind(on_press=lambda inst: [popup.dismiss(), self.open_class_popup(None)])
+
+        # botão criar 
+        create_btn.bind(
+            on_press=lambda inst: self.create_character(classe, name_input.text, popup)
+        )
+
+        popup.open()
+
+    def create_character(self, classe, nome, popup):
+        import os
+        from kivy.app import App
+        from save_manager import save_character
+
+        nome = nome.strip()
+
+        if not nome:
+            nome = classe.default_name
+
+        filename = f"{classe.__name__}_{nome}.json"
+        app = App.get_running_app()
+        path = os.path.join(app.user_data_dir, filename)
+
+        # verifica se já existe
+        if os.path.exists(path):
+            self.show_error(f"Já existe um {classe.__name__} chamado {nome}!")
+            return
+
+        personagem = classe(nome)
+
+        App.get_running_app().character = personagem
+        save_character(personagem)
+
+        popup.dismiss()
+        self.manager.current = "game"
+
+    def show_error(self, message):
+        from kivy.uix.popup import Popup
+        from kivy.uix.label import Label
+
+        popup = Popup(
+            title='Erro',
+            content=Label(text=message),
+            size_hint=(0.6, 0.3)
+        )
+        popup.open()

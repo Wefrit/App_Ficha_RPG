@@ -49,7 +49,7 @@ class Character:
     
     def to_dict(self):
         return {
-            "class": self.__class__.__name__,
+            "class_name": self.__class__.__name__,
             "name": self.name,
             "mana": self.mana,
             "base_mana": self.base_mana,
@@ -82,16 +82,22 @@ class Character:
     @classmethod
     def from_dict(cls, data):
         class_map = {
+            "Panda": Artista_Marcial,
+            "Artífice": Artífice,
+            "Bárbaro": Bárbaro,
             "Bardo": Bardo,
-            "Gorgona": Gorgona,
-            "Fada": Fada,
-            "Golen": Golen,
-            "Elfo": Elfo,
-            "Vampiro": Vampiro,
-            "Panda": Panda,
-            "Dríade": Dríade,
-            "Draconiano": Draconiano,
-            "Who": Who
+            "Elfo": Bruxo,
+            "Vampiro": Bucaneiro,
+            "Who": Caçador,
+            "Draconiano": Cavaleiro,
+            "Clérigo": Clérigo,
+            "Curandeiro": Curandeiro,
+            "Dríade": Druida,
+            "Engenhrio": Engenheiro,
+            "Guerreiro":Guerreiro,
+            "Ladino": Ladino,
+            "Mago":Mago,
+            "Paladino":Paladino,
         }
 
         character_class = class_map.get(data["class"], Character)
@@ -316,7 +322,7 @@ class Druida(Character):
             self.ability_points += 1
         self.base_hp += 2
 
-class Pladino(Character):
+class Paladino(Character):
     sprite = "characters/draconiano/draconiano_base_1.png"
     default_name = 'Paloma'
 
