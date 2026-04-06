@@ -74,12 +74,6 @@ class GameScreen(Screen):
         self.powers_virtues_button = Button(size_hint_y=1, text='Poderes/Virtudes')
         self.powers_virtues_button.bind(on_press=self.open_powers_virtues)
 
-        # self.att_label = Label(size_hint_y=1)
-        # self.magic_label = Label(size_hint_y=1)
-        # self.ability_label = Label(size_hint_y=1)
-        # self.quality_label = Label(size_hint_y=1)
-        
-
             # Left Layout widgets
         left_layout.add_widget(STATS)
         left_layout.add_widget(self.level_label)
@@ -91,18 +85,10 @@ class GameScreen(Screen):
         left_layout.add_widget(self.attributes_abilities_button)
         left_layout.add_widget(self.powers_virtues_button)
         
-        # left_layout.add_widget(self.att_label)
-        # left_layout.add_widget(self.magic_label)
-        # left_layout.add_widget(self.ability_label)
-        # left_layout.add_widget(self.quality_label)
-
             # Left Layout (Bottom)
         self.note_box_button = Button(text='Criar Anotação')
         self.note_box_button.bind(on_press=self.open_annotation)
         left_layout.add_widget(self.note_box_button)
-
-
-
 
             # Mid Layout
                 # Labels
@@ -144,16 +130,13 @@ class GameScreen(Screen):
         mid_layout.add_widget(self.name_label)
         mid_layout.add_widget(self.character_sprite)
         mid_layout.add_widget(self.gain_xp_layout)
-        
-
-
 
         # Right Layout
             # Top
         top_right_box = BoxLayout(
             size_hint_y=0.3,
             spacing=20,
-            padding=50
+            padding=20
         )
                 # Status
         self.stats_button = Button(
@@ -282,9 +265,6 @@ class GameScreen(Screen):
         right_layout.add_widget(self.button_box)
         right_layout.add_widget(bot_right_box)
 
-
-
-
             # Main Layout
         main_layout.add_widget(left_layout)
         main_layout.add_widget(mid_layout)
@@ -305,18 +285,33 @@ class GameScreen(Screen):
         self.mana_label.text = f'Mana: {self.character.mana}/{self.character.base_mana}'
         self.defense_label.text = f'Defesa: {self.character.defense}'
         self.initiative_label.text = f"Iniciativa: {self.character.attribute_dict['destreza'] + self.character.attribute_dict['raciocinio']}"
-        # self.ability_label.text = f'Pontos de Habilidade: {self.character.ability_points}'
-        # self.att_label.text = f'Pontos de Atributo: {self.character.att_points}'
-        # self.magic_label.text = f'Pontos de Poder: {self.character.magic_points}'
-        # self.quality_label.text = f'Pontos de Qualidade {self.character.quality_points}'
         save_character(self.character)
 
         # Botões
             # Botão ganhar xp
-    def gain_xp(self, value):
+    def gain_xp(self, instance):
         value = self.gain_xp_input.text.strip()
-        self.character.gain_xp(int(value))
+        if not value:
+            return
+
+        value = int(value)
+
+        old_stats = {
+            "lvl": self.character.lvl,
+            "hp": self.character.base_hp,
+            "mana": self.character.base_mana,
+            "att": self.character.att_points,
+            "magic": self.character.magic_points,
+            "quality": self.character.quality_points,
+            "ability": self.character.ability_points
+        }
+
+        self.character.gain_xp(value)
+
         self.gain_xp_input.text = ''
+
+        self.check_level_up(old_stats)
+
         self.update_ui()
     
             # Botão recuperar vida
@@ -434,3 +429,72 @@ class GameScreen(Screen):
 
         popup.open()
         self.update_ui()
+
+    def check_level_up(self, old_stats):
+        new_stats = {
+            "lvl": self.character.lvl,
+            "hp": self.character.base_hp,
+            "mana": self.character.base_mana,
+            "att": self.character.att_points,
+            "magic": self.character.magic_points,
+            "quality": self.character.quality_points,
+            "ability": self.character.ability_points
+        }
+
+        # se não subiu nível, ignora
+        if new_stats["lvl"] == old_stats["lvl"]:
+            return
+
+        ganhos = []
+
+        if new_stats["hp"] > old_stats["hp"]:
+            ganhos.append(f"+{new_stats['hp'] - old_stats['hp']} HP Base")
+
+        if new_stats["mana"] > old_stats["mana"]:
+            ganhos.append(f"+{new_stats['mana'] - old_stats['mana']} Mana Base")
+
+        if new_stats["att"] > old_stats["att"]:
+            ganhos.append(f"+{new_stats['att'] - old_stats['att']} Pontos de Atributo")
+
+        if new_stats["magic"] > old_stats["magic"]:
+            ganhos.append(f"+{new_stats['magic'] - old_stats['magic']} Pontos de Magia")
+
+        if new_stats["quality"] > old_stats["quality"]:
+            ganhos.append(f"+{new_stats['quality'] - old_stats['quality']} Pontos de Qualidade")
+
+        if new_stats["ability"] > old_stats["ability"]:
+            ganhos.append(f"+{new_stats['ability'] - old_stats['ability']} Pontos de Habilidade")
+
+        self.show_level_up_popup(old_stats["lvl"], new_stats["lvl"], ganhos)
+
+    def show_level_up_popup(self, old_lvl, new_lvl, ganhos):
+        from kivy.uix.popup import Popup
+        from kivy.uix.boxlayout import BoxLayout
+        from kivy.uix.label import Label
+        from kivy.uix.button import Button
+
+        layout = BoxLayout(orientation='vertical', spacing=10, padding=20)
+
+        texto = f"Subiu de nível!\n{old_lvl} → {new_lvl}\n\n"
+
+        if ganhos:
+            texto += "\n".join(ganhos)
+        else:
+            texto += "Sem ganhos adicionais"
+
+        label = Label(text=texto)
+
+        close_btn = Button(text="OK", size_hint_y=0.3)
+
+        popup = Popup(
+            title="Level Up!",
+            content=layout,
+            size_hint=(0.7, 0.5)
+        )
+
+        close_btn.bind(on_press=popup.dismiss)
+
+        layout.add_widget(label)
+        layout.add_widget(close_btn)
+
+        popup.open()

@@ -66,6 +66,7 @@ class Character:
             "xp": self.xp,
             "lvl": self.lvl,
             "attribute_dict": self.attribute_dict,
+            "virtues_dict": self.virtues_dict,
             "magic_dict": self.magic_dict,
             "ability_dict": self.ability_dict,
             "ability_points": self.ability_points,
