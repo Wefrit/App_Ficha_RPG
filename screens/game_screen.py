@@ -11,6 +11,7 @@ from characters.characters import *
 from ui.attributes_screen import AttributesScreen
 from ui.magic_virtue_screen import MagicVirtuesScreen
 from save_manager import save_character
+from kivy.metrics import dp
 
 class GameScreen(Screen):
 
@@ -159,7 +160,7 @@ class GameScreen(Screen):
         self.upper_button_box = BoxLayout(
             orientation='horizontal',
             size_hint_y=None,
-            height=100,
+            height=dp(100),
             spacing=10,
             padding=10
         )
@@ -168,7 +169,7 @@ class GameScreen(Screen):
         self.hp_up_button = Button(
             text='+ 1 hp',
             size_hint=(None, None),
-            size=(80,80),
+            size=(dp(80), dp(80)),
         )
         self.hp_up_button.bind(on_press=self.hp_up)
 
@@ -183,22 +184,22 @@ class GameScreen(Screen):
             padding=10,
             spacing=10,
             size_hint_y=None,
-            height=100,
+            height=dp(100),
         )
                     # Botões da caixa de botões do meio
                              # Botão de ganhar mana
         self.mana_up_button = Button(
             text='+ 1 Mana',
-            size_hint=(None,None),
-            size=(80,80),
+            size_hint=(None, None),
+            size=(dp(80), dp(80)),
         )
         self.mana_up_button.bind(on_press=self.mana_up)
 
                             # Botão de perder mana
         self.mana_down_button = Button(
             text='- 1 Mana',
-            size_hint=(None,None),
-            size=(80,80),
+            size_hint=(None, None),
+            size=(dp(80), dp(80)),
         )
         self.mana_down_button.bind(on_press=self.mana_down)
              
@@ -213,7 +214,7 @@ class GameScreen(Screen):
         self.bottom_button_box = BoxLayout(
             orientation='horizontal',
             size_hint_y=None,
-            height=100,
+            height=dp(100),
             padding=10,
             spacing=10,
         )
@@ -221,8 +222,8 @@ class GameScreen(Screen):
                             # Botão de perder hp
         self.hp_down_button = Button(
             text='- 1 HP',
-            size_hint=(None,None),
-            size=(80,80)
+            size_hint=(None, None),
+            size=(dp(80), dp(80)),
         )
         self.hp_down_button.bind(on_press=self.hp_down)
 
