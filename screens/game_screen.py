@@ -11,7 +11,6 @@ from characters.characters import *
 from ui.attributes_screen import AttributesScreen
 from ui.magic_virtue_screen import MagicVirtuesScreen
 from save_manager import save_character
-from kivy.metrics import dp
 
 class GameScreen(Screen):
 
@@ -135,7 +134,7 @@ class GameScreen(Screen):
         # Right Layout
             # Top
         top_right_box = BoxLayout(
-            size_hint_y=0.3,
+            size_hint_y=0.15,
             spacing=20,
             padding=20
         )
@@ -154,13 +153,13 @@ class GameScreen(Screen):
             padding=[5, 10, 10, 1],
             spacing=10,
             size_hint_x=1,
+            size_hint_y=0.7,
         )
                 # Componentes da caixa de botões
                     # Caixa de botões de cima
         self.upper_button_box = BoxLayout(
             orientation='horizontal',
-            size_hint_y=None,
-            height=dp(100),
+            size_hint_y=1,
             spacing=10,
             padding=10
         )
@@ -168,69 +167,66 @@ class GameScreen(Screen):
                             # Botão de ganhar hp
         self.hp_up_button = Button(
             text='+ 1 hp',
-            size_hint=(None, None),
-            size=(dp(80), dp(80)),
+            size_hint=(0.8, 1),
+            pos_hint={'center_y': 0.5}
         )
         self.hp_up_button.bind(on_press=self.hp_up)
 
                 # Widget Caixa de Botões de cima
-        self.upper_button_box.add_widget(Widget(size_hint_x=1,size_hint_y=1))
+        self.upper_button_box.add_widget(Widget(size_hint_x=0.7))
         self.upper_button_box.add_widget(self.hp_up_button)
-        self.upper_button_box.add_widget(Widget(size_hint_x=1,size_hint_y=1))
+        self.upper_button_box.add_widget(Widget(size_hint_x=0.7))
 
                     # Caixa de botões do meio
         self.mid_button_box = BoxLayout(
             orientation='horizontal',
-            padding=10,
             spacing=10,
-            size_hint_y=None,
-            height=dp(100),
+            size_hint_y=1,
         )
                     # Botões da caixa de botões do meio
                              # Botão de ganhar mana
         self.mana_up_button = Button(
             text='+ 1 Mana',
-            size_hint=(None, None),
-            size=(dp(80), dp(80)),
+            size_hint=(0.4, 0.8),
+            pos_hint={'center_y':0.5},
         )
         self.mana_up_button.bind(on_press=self.mana_up)
 
                             # Botão de perder mana
         self.mana_down_button = Button(
             text='- 1 Mana',
-            size_hint=(None, None),
-            size=(dp(80), dp(80)),
+            size_hint=(0.4, 0.8),
+            pos_hint={'center_y':0.5},
         )
         self.mana_down_button.bind(on_press=self.mana_down)
              
                 # Widgets da Caixa de botões de baixo
-        self.mid_button_box.add_widget(Widget(size_hint_x=1))
+        self.mid_button_box.add_widget(Widget(size_hint_x=0.1))
         self.mid_button_box.add_widget(self.mana_down_button)
-        self.mid_button_box.add_widget(Widget(size_hint_x=0.2))
+        self.mid_button_box.add_widget(Widget(size_hint_x=0.1))
         self.mid_button_box.add_widget(self.mana_up_button)
-        self.mid_button_box.add_widget(Widget(size_hint_x=1))
+        self.mid_button_box.add_widget(Widget(size_hint_x=0.1))
 
             # Caixa de botões de baixo
         self.bottom_button_box = BoxLayout(
             orientation='horizontal',
-            size_hint_y=None,
-            height=dp(100),
-            padding=10,
+            size_hint_y=1,
             spacing=10,
+            padding=10
         )
                     # Botões da caixa de botões de baixo
                             # Botão de perder hp
         self.hp_down_button = Button(
-            text='- 1 HP',
-            size_hint=(None, None),
-            size=(dp(80), dp(80)),
+            text='- 1 hp',
+            size_hint=(0.8, 1),
+            pos_hint={'center_y':0.5},
         )
         self.hp_down_button.bind(on_press=self.hp_down)
 
                 # Widget Caixa de Botões de baixo
-        self.bottom_button_box.add_widget(Widget(size_hint_x=1,size_hint_y=1))
+        self.bottom_button_box.add_widget(Widget(size_hint_x=0.7))
         self.bottom_button_box.add_widget(self.hp_down_button)
-        self.bottom_button_box.add_widget(Widget(size_hint_x=1,size_hint_y=1))
+        self.bottom_button_box.add_widget(Widget(size_hint_x=0.7))
 
             # Widgets da caixa de botões
         self.button_box.add_widget(self.upper_button_box)
@@ -241,9 +237,8 @@ class GameScreen(Screen):
                 # Return Box
         bot_right_box = BoxLayout(
             orientation='horizontal',
-            size_hint_y=0.5,
-            spacing=20,
-            padding=10,
+            size_hint_y=0.15,
+
         )
                     # Voltar
         self.return_button = Button(
@@ -262,7 +257,6 @@ class GameScreen(Screen):
 
         # Right Layout Widgets
         right_layout.add_widget(top_right_box)
-        right_layout.add_widget(Widget(size_hint_y=0.3))
         right_layout.add_widget(self.button_box)
         right_layout.add_widget(bot_right_box)
 
