@@ -148,16 +148,16 @@ class Bardo(Character):
     def _level_up(self):
         # Bardo
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 2
+            self.magic_points += 1
         if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
         if (self.lvl - 1) % 4 == 0:
-            self.magic_points += 1
+            self.base_mana += 3
         if (self.lvl - 1) % 3 == 0:
             self.quality_points += 2
         if self.lvl % 3 == 0:
-            self.base_hp += 1
-        self.ability_points += 1
+            self.ability_points += 2
+        self.base_hp += 1
 
     # Ladina
 class Ladino(Character):
@@ -177,15 +177,15 @@ class Ladino(Character):
     def _level_up(self):
         # Ladina
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
             self.magic_points += 1
+        if (self.lvl - 1) % 5 == 0:
+            self.att_points += 2
         if (self.lvl - 1) % 4 == 0:
-            self.att_points += 1
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.base_hp += 1
+            self.quality_points += 3
         if self.lvl % 3 == 0:
-            self.quality_points += 2
+            self.base_hp += 1
         self.ability_points += 2
 
 class Clérigo(Character):
@@ -205,15 +205,15 @@ class Clérigo(Character):
     def _level_up(self):
         # Clérigo   
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 2
+            self.magic_points += 1
         if (self.lvl - 1) % 5 == 0:
-            self.magic_points += 2
-        if (self.lvl - 1) % 4 == 0:
             self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.base_mana += 2
         if (self.lvl - 1) % 3 == 0:
-            self.ability_points += 1
+            self.quality_points += 3
         if self.lvl % 3 == 0:
-            self.quality_points += 1
+            self.ability_points += 2
         self.base_hp += 1
 
 class Bárbaro(Character):
@@ -233,16 +233,16 @@ class Bárbaro(Character):
     def _level_up(self):
         # Bárbaro
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
             self.magic_points += 1
+        if (self.lvl - 1) % 5 == 0:
+            self.att_points += 1
         if (self.lvl - 1) % 4 == 0:
-            self.att_points += 2
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 1
+            self.quality_points += 2
         if self.lvl % 3 == 0:
             self.ability_points += 2
-        self.base_hp += 1
+        self.base_hp += 3
 
 class Mago(Character):
     sprite = "characters/elfo/elfo_base_1.png"
@@ -262,11 +262,11 @@ class Mago(Character):
     def _level_up(self):
         # Mago
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 2
+            self.magic_points += 3
         if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
         if (self.lvl - 1) % 4 == 0:
-            self.magic_points += 2
+            self.base_mana += 2
         if (self.lvl - 1) % 3 == 0:
             self.quality_points += 1
         if self.lvl % 3 == 0:
@@ -291,16 +291,16 @@ class Caçador(Character):
     def _level_up(self):
         # Caçadora
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
             self.magic_points += 1
+        if (self.lvl - 1) % 5 == 0:
+            self.att_points += 1
         if (self.lvl - 1) % 4 == 0:
-            self.att_points += 2
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.base_hp += 1
-        if self.lvl % 3 == 0:
             self.quality_points += 2
-        self.ability_points += 1
+        if self.lvl % 3 == 0:
+            self.ability_points += 3
+        self.base_hp += 2
 
 class Druida(Character):
     sprite = "characters/driade/driade_base_1.png"
@@ -320,16 +320,16 @@ class Druida(Character):
     def _level_up(self):
         # Druida
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 2
+            self.magic_points += 1
         if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
         if (self.lvl - 1) % 4 == 0:
-            self.magic_points += 1
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 1
+            self.quality_points += 2
         if self.lvl % 3 == 0:
-            self.ability_points += 1
-        self.base_hp += 2
+            self.ability_points += 2
+        self.base_hp += 3
 
 class Paladino(Character):
     sprite = "characters/draconiano/draconiano_base_1.png"
@@ -349,16 +349,16 @@ class Paladino(Character):
     def _level_up(self):
         # Paladino
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
+            self.magic_points += 1
         if (self.lvl - 1) % 5 == 0:
-            self.magic_points += 2
-        if (self.lvl - 1) % 4 == 0:
             self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 1
+            self.quality_points += 3
         if self.lvl % 3 == 0:
-            self.base_hp += 2
-        self.ability_points += 1
+            self.ability_points += 2
+        self.base_hp += 2
 
 class Cavaleiro(Character):
     sprite = "characters/who/who_base_1.png"
@@ -378,16 +378,16 @@ class Cavaleiro(Character):
     def _level_up(self):
         # Cavaleiro
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
             self.magic_points += 1
-        if (self.lvl - 1) % 4 == 0:
+        if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 1
+            self.quality_points += 3
         if self.lvl % 3 == 0:
-            self.base_hp += 2
-        self.ability_points += 2
+            self.ability_points += 2
+        self.base_hp += 2
 
 class Artífice(Character):
     sprite = "characters/who/who_base_1.png"
@@ -407,16 +407,16 @@ class Artífice(Character):
     def _level_up(self):
         # Cavaleiro
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 2
+            self.magic_points += 3
         if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
         if (self.lvl - 1) % 4 == 0:
-            self.magic_points += 2
+            self.base_mana += 2
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 1
+            self.quality_points += 2
         if self.lvl % 3 == 0:
-            self.base_hp += 1
-        self.ability_points += 1
+            self.ability_points += 1
+        self.base_hp += 1
 
 class Artista_Marcial(Character):
     sprite = "characters/who/who_base_1.png"
@@ -436,16 +436,16 @@ class Artista_Marcial(Character):
     def _level_up(self):
         # Cavaleiro
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
             self.magic_points += 1
-        if (self.lvl - 1) % 4 == 0:
+        if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 2
+            self.quality_points += 3
         if self.lvl % 3 == 0:
-            self.base_hp += 1
-        self.ability_points += 2
+            self.ability_points += 2
+        self.base_hp += 2
 
 class Bruxo(Character):
     sprite = "characters/who/who_base_1.png"
@@ -463,18 +463,18 @@ class Bruxo(Character):
         self.att_points = 0
 
     def _level_up(self):
-        # Cavaleiro
+        # Bruxo
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 2
+            self.magic_points += 2
         if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
         if (self.lvl - 1) % 4 == 0:
-            self.magic_points += 2
+            self.base_mana += 3
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 1
+            self.quality_points += 2
         if self.lvl % 3 == 0:
-            self.base_hp += 1
-        self.ability_points += 1
+            self.ability_points += 1
+        self.base_hp += 1
 
 class Bucaneiro(Character):
     sprite = "characters/who/who_base_1.png"
@@ -494,16 +494,16 @@ class Bucaneiro(Character):
     def _level_up(self):
         # Cavaleiro
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
             self.magic_points += 1
-        if (self.lvl - 1) % 4 == 0:
+        if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
             self.quality_points += 2
         if self.lvl % 3 == 0:
-            self.base_hp += 1
-        self.ability_points += 2
+            self.ability_points += 3
+        self.base_hp += 2
 
 class Curandeiro(Character):
     sprite = "characters/who/who_base_1.png"
@@ -523,16 +523,16 @@ class Curandeiro(Character):
     def _level_up(self):
         # Cavaleiro
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 2
+            self.magic_points += 1
         if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
         if (self.lvl - 1) % 4 == 0:
-            self.magic_points += 1
+            self.base_mana += 2
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 1
+            self.quality_points += 3
         if self.lvl % 3 == 0:
-            self.base_hp += 1
-        self.ability_points += 2
+            self.ability_points += 2
+        self.base_hp += 1
 
 class Engenheiro(Character):
     sprite = "characters/who/who_base_1.png"
@@ -550,18 +550,18 @@ class Engenheiro(Character):
         self.att_points = 0
 
     def _level_up(self):
-        # Cavaleiro
+        # Engenheiro
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
             self.magic_points += 1
+        if (self.lvl - 1) % 5 == 0:
+            self.att_points += 2
         if (self.lvl - 1) % 4 == 0:
-            self.att_points += 1
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 2
+            self.quality_points += 3
         if self.lvl % 3 == 0:
-            self.base_hp += 1
-        self.ability_points += 2
+            self.ability_points += 2
+        self.base_hp += 1
 
 class Guerreiro(Character):
     sprite = "characters/who/who_base_1.png"
@@ -579,15 +579,15 @@ class Guerreiro(Character):
         self.att_points = 0
 
     def _level_up(self):
-        # Cavaleiro
+        # Guerreiro
         if (self.lvl - 1) % 6 == 0:
-            self.base_mana += 1
-        if (self.lvl - 1) % 5 == 0:
             self.magic_points += 1
-        if (self.lvl - 1) % 4 == 0:
+        if (self.lvl - 1) % 5 == 0:
             self.att_points += 1
+        if (self.lvl - 1) % 4 == 0:
+            self.base_mana += 1
         if (self.lvl - 1) % 3 == 0:
-            self.quality_points += 2
+            self.quality_points += 3
         if self.lvl % 3 == 0:
-            self.base_hp += 2
-        self.ability_points += 1
+            self.ability_points += 2
+        self.ability_points += 2

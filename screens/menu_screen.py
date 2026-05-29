@@ -146,7 +146,6 @@ class  MenuScreen(Screen):
             if inspect.isclass(obj):
                 if issubclass(obj, chars.Character) and obj is not chars.Character:
                     
-                    # 🔥 GARANTE que só entra classe jogável
                     if hasattr(obj, "sprite"):
                         classes.append(obj)
 

@@ -130,22 +130,6 @@ class AttributesScreen(Screen):
         self.attribute_layout.add_widget(new_attribute_layout)
         self.attribute_layout.add_widget(self.loop_attribute_box)
 
-        # Caixa de botão voltar
-
-        # return_box_layout = BoxLayout(
-        #     orientation='vertical',
-        #     size_hint_x=1,
-        # )
-        #     # Elementos da caixa de botão voltar
-        # return_button = Button(text='Voltar')
-        # return_button.bind(on_press=self.go_to_options)
-
-                # Adicionando elemtnos ao return box layout
-        # return_box_layout.add_widget(Widget(size_hint_y=8))
-        # return_box_layout.add_widget(return_button)
-               
-        # Screen Layout[Vertical]
-        # screen_layout.add_widget(Widget(size_hint_x=1))
         screen_layout.add_widget(self.ability_layout)
         screen_layout.add_widget(self.attribute_layout)
         # screen_layout.add_widget(return_box_layout)
